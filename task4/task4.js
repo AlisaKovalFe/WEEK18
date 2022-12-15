@@ -1,35 +1,40 @@
 let notes = []
 
-        function addNote() {
-            let newNote = document.querySelector('#newNote').value;
-            notes.push(newNote)
-            generateNote()
+document.addEventListener('DOMContentLoaded', function() {
+    let getMyNewNote = localStorage.getItem('MyNewNote')
+    if (getMyNewNote != null) {                
+        document.querySelector('#container').innerHTML = getMyNewNote                    
+    }   
+})
 
-            document.querySelector('#newNote').value = ''
+function addNote() {
+    let newNote = document.querySelector('#newNote').value;
+    notes.push(newNote)
 
-            if (localStorage.getItem('name') == null) {                
-                    localStorage.setItem('name', newNote)                
-            }
+    document.querySelector('#newNote').value = ''
 
-            if (localStorage.getItem('name') != null) {                
-                    localStorage.setItem('name', notes)                 
-            }
+    if (localStorage.getItem('MyNewNote') == null) {                
+            localStorage.setItem('MyNewNote', notes)                
+    }
 
-        }
+    if (localStorage.getItem('MyNewNote') != null) {                
+            localStorage.setItem('MyNewNote', notes)                 
+    }
 
-        function deleteNote() {
-            
-        }
+    generateNote(newNote)
 
-        function generateNote() {
-            let newString = '';
-            for (let note of notes) {
-                newString += `<div><input type="checkbox"><span>${note}</span><button id="del" onclick="deleteNote()"><img src="./images/del.png"></button></div>`;
-            }
-            document.querySelector('#container').innerHTML = newString;
-        }
+}
 
-        document.addEventListener('DOMContentLoaded', function() {
-            generateNote()
-            
-        })
+function generateNote() {
+    let newString = '';
+    for (let note of notes) {
+        newString += `<div><input type="checkbox"><span>${note}</span><button id="del" onclick="deleteNote(this)">Удалить</button></div>`;
+    }
+    document.querySelector('#container').innerHTML = newString;
+}
+
+function deleteNote(sender) {
+    sender.parentElement.classList.toggle('hidden')
+}
+
+
