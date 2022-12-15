@@ -58,7 +58,7 @@
 
     <div>
         <label for="date">Дата рождения питомца</label>
-        <input type="datetime" id="date" required min="01.01.2022"/><br>
+        <input type="date" id="date" required /><br>
         <label for="date">Количество лет</label>
         <input id="out" type="number" min="1" max="30">
     </div>
@@ -98,8 +98,8 @@
     <fieldset>
         <legend>Инфорамция о владельце</legend>
         <div>
-            <label for="name">Имя </label>
-            <input type="text" id="name" placeholder="Иван Иванов" required/>
+            <label for="name">Имя</label>
+            <input type="text" id="name" placeholder="Иван Иванов" required pattern="/[\p{Alpha}\p{M}\p{Nd}\p{Pc}\p{Join_C}]/gu"/>
         </div>
         <div>
             <label for="phone">Телефон</label>
