@@ -12,25 +12,29 @@ function checkValidity(input) {
     //     errors.push('Введен неправильный тип данных')
     // }
 
-    if (validity.valid && !validity.valueMissing) {
-        let person = document.getElementById('name')        
-        let surname = document.getElementById('surname')
-        let town = document.getElementById('town')
-
-        let personFormat = /^[а-яА-ЯёЁa-zA-Z]+$/        
-        let townFormat = /^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$/ 
-
+    if (input.id === 'name' && !validity.valueMissing) {
+        let person = document.getElementById('name')  
+        let personFormat = /^[а-яА-ЯёЁa-zA-Z]+$/ 
         if (!person.value.match(personFormat) ) {
             errors.push('Неверный формат ввода имени');
-        }   
-        if (!surname.value.match(personFormat) ) {
-            errors.push('Неверный формат ввода фамилии');
-        }   
-        if (!town.value.match(townFormat) ) {
-            errors.push('Неверный формат ввода города');
-        }             
+        }
     }
-    
+
+    if (input.id === 'surname' && !validity.valueMissing) {
+        let surname = document.getElementById('surname')  
+        let personFormat = /^[а-яА-ЯёЁa-zA-Z]+$/ 
+        if (!surname.value.match(personFormat) ) {
+            errors.push('Неверный формат ввода имени');
+        }
+    }
+
+    if (input.id === 'town' && !validity.valueMissing) {
+        let town = document.getElementById('town')  
+        let townFormat = /^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$/ 
+        if (!town.value.match(townFormat) ) {
+            errors.push('Неверный формат ввода имени');
+        }
+    }
 
     if (validity.rangeUnderflow) {        
         errors.push('Возраст должен быть не менее чем ' + input.min)

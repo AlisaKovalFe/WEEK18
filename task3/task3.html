@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task3</title>
+
+    <style>
+        h1 {
+            margin-bottom: 2rem;
+        }
+
+        .warp {
+            display: flex;
+            flex-direction: column;
+            width: 50rem;
+        }
+
+        button {
+            margin-top: 2rem;
+            
+            width: 10rem;
+            height: 2rem;
+        }
+
+        .out {
+            display: flex;
+        }
+
+        .inner {         
+            width: 10rem;   
+            margin-right: 1rem;
+            
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        } 
+
+        .inner_color {
+            color: green;
+        }
+
+        #container {
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        #person {
+            width: 10rem;
+            margin-bottom: 2rem;
+        }
+
+        #comment {
+            width: 20rem;
+        }
+
+        .wrap-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        img {
+            width: 1rem;
+
+        }
+
+        .wrap-inner {
+            display: flex;
+        }
+
+    </style>
+</head>
+
+
+<body>
+    <div class="warp">
+        <h1>Чат</h1>
+
+        <div id="container"><em>Тут будут ваши комментарии</em> </div>
+
+        <div class="wrap-item">
+            <div class="wrap-inner">
+                <label for="person">Имя</label>
+                <img id="img" src="https://dthezntil550i.cloudfront.net/kg/latest/kg1802132010216500004834729/1280_960/557d644f-12f3-49e1-bb66-23c16400540d.png" alt="аватарка" onclick="addAvatar()">
+            </div>
+            <input id="person" type="text">
+        </div>
+
+        
+        <div class="wrap-item">
+            <label for="comment">Комментарий</label>
+            <textarea name="" id="comment" rows="10" placeholder="напиши здесь коментарий" ></textarea>
+        </div>
+
+        <button>Отправить</button>
+    </div>
+
+    <script src="./task3.js"></script>
+</body>
+</html>
