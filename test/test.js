@@ -53,3 +53,4 @@ function typeMe() {
 
 
 // document.querySelector('#button').addEventListener('click', checkCreditCard)
+
