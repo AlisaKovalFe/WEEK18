@@ -19,11 +19,25 @@ localStorage.setItem('login', 'coo')
 localStorage.getItem('login')
 
 3. Данные пользователя для сохранения:
-1) пароль локально на компьютере
+1) пароли пользователя локально на компьютере
 2) комментарии чата на сервере
 3) гугл докс на сервере
-4) адрес в онлайн магазине на компьютере
+4) адрес при заказе в онлайн магазине на компьютере
 
+4. валидация кредитки
+пример js (в html кнопку и инпут с соотвествующими id)
+
+function checkCreditCard() {
+    let creditCard = document.getElementById('creditCard')
+    let creditFormat = /^\b[3-6]\d{3}[ \-_.]?(\d{4}[ \-_.]?){2}\d{4}\b$/
+    if (!creditCard.value.match(creditFormat) ) {
+        console.log(('Формат кредитной карты неверное указан'))
+    } else {
+        console.log(('Ваша карта прошла проверку'))
+    }
+}
+
+document.querySelector('#button').addEventListener('click', checkCreditCard)
 
 5. Input только с числами
 
@@ -41,12 +55,20 @@ localStorage.getItem('login')
         }
     }
 
+3) function typeMe() {
+    let input = document.querySelector('input')
+    let inputFormat = /^[1-9]+[0-9]*$/
+    if (!input.value.match(inputFormat)) {
+        document.querySelector('input').value = 'это не число'
+    } else {
+        document.querySelector('input').value = 'спасибо, это число'
+    }
+}
 
-7. ??????????
+6. Регулярка для ФИО
+^[а-яА-ЯёЁa-zA-Z]+ [а-яА-ЯёЁa-zA-Z]+ ?[а-яА-ЯёЁa-zA-Z]+$
 
-Можно невалидное поле красным подсветить и в placeholder дать подсказку.
-Если ввод некорректен, можно "включать стиль" css с красным цветом
-
+7. Невалидное поле или, если введены неккоррекные данные, можно поле ввода красным подсветить через css (добавить :invalid для невалдиного поля, через js добавить класс .incorrect по нажатию кнопки)/ в placeholder (атрибут) дать подсказку или в отдельном div
 
 
 8. Недостатки у стандартного способа задания валидации через HTML5
