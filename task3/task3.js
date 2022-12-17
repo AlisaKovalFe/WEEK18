@@ -3,28 +3,28 @@ let comment = document.querySelector('#comment')
 let container = document.querySelector('#container')
 
 
-commentsAll = []
+let commentsAll = []
 
 document.addEventListener('DOMContentLoaded', function() {
-    let personSaved = localStorage.getItem('person')
+    let person = localStorage.getItem('person')
     let getNewComment = localStorage.getItem('newComment')
-    if (personSaved != null && getNewComment != null) {
-        document.querySelector('#person').value = personSaved
+    if (person != null && getNewComment != null) {
+        document.querySelector('#person').value = person
 
-        let arr = getNewComment.split(',')
-        let newString = '' 
-        for (let comment of arr) {
+        commentsAll = getNewComment.split(',')
+        // let newString = '' 
+        for (let comment of commentsAll) {
 
             if (comment.search('/viagra/gi') || comment.search('/xxx/gi')) {
                 let filter = '***'
                 let checkResultFirst = comment.replace(/viagra/gi, filter)
-                console.log(checkResultFirst);
-                let checkResultSecond = comment.replace(/xxx/gi, filter)
+                let checkResultSecond = checkResultFirst.replace(/xxx/gi, filter)
     
-                newString += `<div class="out"><div class="inner inner_color" type="text">${personSaved}:</div><div class="inner" type="text">${checkResultFirst}</div></div>`            
+                // newString += `<div class="out"><div class="inner inner_color" type="text">${personSaved}:</div><div class="inner" type="text">${checkResultSecond}</div></div>`    
+                container.innerHTML += `<div class="out"><div class="inner inner_color" type="text">${person}:</div><div class="inner" type="text">${checkResultSecond}</div></div>`                 
             }
             }                
-        document.querySelector('#container').innerHTML = newString;           
+        // document.querySelector('#container').innerHTML = newString;           
     } 
 
     let getImage = localStorage.getItem('avatar')
@@ -47,8 +47,7 @@ function addAva() {
         localStorage.setItem('avatar', img.src)
         img.classList.add('imgSize')
     } 
-    addAvaButton.classList.toggle('hidden')
-    
+    addAvaButton.classList.toggle('hidden')    
 }
 
 
@@ -66,9 +65,9 @@ function checkSpam() {
             let filter = '***'
             let checkResultFirst = comment.replace(/viagra/gi, filter)
             console.log(checkResultFirst);
-            let checkResultSecond = comment.replace(/xxx/gi, filter)
+            let checkResultSecond = checkResultFirst.replace(/xxx/gi, filter)
 
-            container.innerHTML += `<div class="out"><div class="inner inner_color" type="text">${person}:</div><div class="inner" type="text">${checkResultFirst}</div></div>`            
+            container.innerHTML += `<div class="out"><div class="inner inner_color" type="text">${person}:</div><div class="inner" type="text">${checkResultSecond}</div></div>`            
         }
     }   
 
@@ -85,6 +84,10 @@ function checkSpam() {
     }
 
 }   
+
+// function addComment() {
+    
+// }
 
 
 button.addEventListener('click', checkSpam)
