@@ -1,33 +1,55 @@
-let button = document.querySelector('button')
+let button = document.querySelector('#send')
 let comment = document.querySelector('#comment')
 let container = document.querySelector('#container')
-let img = document.querySelector('#img')
+
 
 commentsAll = []
 
 document.addEventListener('DOMContentLoaded', function() {
     let personSaved = localStorage.getItem('person')
-    if (personSaved != null) {
-        document.querySelector('#person').value = personSaved
-    }
-
     let getNewComment = localStorage.getItem('newComment')
-    if (getNewComment != null) {                
-        document.querySelector('#container').innerHTML = getNewComment                    
+    if (personSaved != null && getNewComment != null) {
+        document.querySelector('#person').value = personSaved
+
+        let arr = getNewComment.split(',')
+        let newString = '' 
+        for (let comment of arr) {
+
+            if (comment.search('/viagra/gi') || comment.search('/xxx/gi')) {
+                let filter = '***'
+                let checkResultFirst = comment.replace(/viagra/gi, filter)
+                console.log(checkResultFirst);
+                let checkResultSecond = comment.replace(/xxx/gi, filter)
+    
+                newString += `<div class="out"><div class="inner inner_color" type="text">${personSaved}:</div><div class="inner" type="text">${checkResultFirst}</div></div>`            
+            }
+            }                
+        document.querySelector('#container').innerHTML = newString;           
     } 
 
-    // let getNewAva = localStorage.getItem('img')
-    // if (getNewAva != null) {                
-    //     document.querySelector('#img').src = getNewAva                    
-    // } 
+    let getImage = localStorage.getItem('avatar')
+    if (getImage != null) {
+        document.querySelector('#img').src = getImage
+        let img = document.querySelector('#img')
+        img.classList.add('imgSize')
+        let addAvaButton = document.querySelector('#addAva')
+        addAvaButton.classList.toggle('hidden')
+    }
+
 })
 
-// function addAvatar() {
-//     let t = prompt('Введите url аватарки', 'url')
-//     img.src = t
+function addAva() {
+    let addAvaButton = document.querySelector('#addAva')
 
-
-// }
+    if (localStorage.getItem('avatar') == null) {         
+        let img = document.querySelector('#img') 
+        img.src = 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Felis_silvestris_silvestris.jpg'  
+        localStorage.setItem('avatar', img.src)
+        img.classList.add('imgSize')
+    } 
+    addAvaButton.classList.toggle('hidden')
+    
+}
 
 
 function checkSpam() {
@@ -46,7 +68,6 @@ function checkSpam() {
             console.log(checkResultFirst);
             let checkResultSecond = comment.replace(/xxx/gi, filter)
 
-            container.style.fontSize = '1rem'
             container.innerHTML += `<div class="out"><div class="inner inner_color" type="text">${person}:</div><div class="inner" type="text">${checkResultFirst}</div></div>`            
         }
     }   
@@ -62,11 +83,6 @@ function checkSpam() {
     if (localStorage.getItem('person') == null) {                
         localStorage.setItem('person', person)                
     }
-
-    if (localStorage.getItem('person') != null) {                
-        localStorage.setItem('person', person)                
-    }
-    
 
 }   
 
