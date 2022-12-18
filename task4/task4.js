@@ -1,3 +1,4 @@
+
 function addNote() {
     let noteCounter = localStorage.length
     let newNote = document.querySelector('#newNote');
@@ -42,45 +43,45 @@ function deleteNote() {
 
 
 
+// это работает, надо еще валидацию добавить
 
-// // это работает, но, видимо, так лучше не делать
+let notes = []
 
-// let notes = []
+document.addEventListener('DOMContentLoaded', function() {
+    let getMyNewNote = localStorage.getItem('MyNewNote')
+    if (getMyNewNote != null) {
+        notes = getMyNewNote.split(',')
+        generateNote()               
+    }   
+})
 
-// document.addEventListener('DOMContentLoaded', function() {
-//     let getMyNewNote = localStorage.getItem('MyNewNote')
-//     if (getMyNewNote != null) {
-//         let arr = getMyNewNote.split(',')
-//         let newString = '' 
-//         for (let note of arr) {
-//             newString += `<div><input type="checkbox"><span>${note}</span><button id="del" onclick="deleteNote(this)">Удалить</button></div>`;
-//         }                
-//         document.querySelector('#container').innerHTML = newString;                
-//     }   
-// })
+function addNote() {
+    let newNote = document.querySelector('#newNote').value;
+    notes.push(newNote)
 
-// function addNote() {
-//     let newNote = document.querySelector('#newNote').value;
-//     notes.push(newNote)
+    document.querySelector('#newNote').value = ''
 
-//     document.querySelector('#newNote').value = ''
+    if (localStorage.getItem('MyNewNote') == null) {                
+            localStorage.setItem('MyNewNote', notes)                
+    }
 
-//     if (localStorage.getItem('MyNewNote') == null) {                
-//             localStorage.setItem('MyNewNote', notes)                
-//     }
+    if (localStorage.getItem('MyNewNote') != null) {                
+            localStorage.setItem('MyNewNote', notes)                 
+    }
 
-//     if (localStorage.getItem('MyNewNote') != null) {                
-//             localStorage.setItem('MyNewNote', notes)                 
-//     }
+    generateNote()
 
-//     generateNote()
+}
 
-// }
+function generateNote() {
+    let newString = '';
+    for (let note of notes) {
+        newString += `<div id="optional"><input type="checkbox"><span>${note}</span><button id="del" onclick="deleteNote(this)">Удалить</button></div>`;
+    }
+    document.querySelector('#container').innerHTML = newString;
+}
 
-// function generateNote() {
-//     let newString = '';
-//     for (let note of notes) {
-//         newString += `<div><input type="checkbox"><span>${note}</span><button id="del" onclick="deleteNote(this)">Удалить</button></div>`;
-//     }
-//     document.querySelector('#container').innerHTML = newString;
-// }
+function deleteNote() {
+    let optional = document.querySelector('#optional')
+    optional.classList.toggle('hidden') 
+}

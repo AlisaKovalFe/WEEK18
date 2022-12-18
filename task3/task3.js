@@ -4,27 +4,15 @@ let container = document.querySelector('#container')
 
 
 let commentsAll = []
+let person
 
 document.addEventListener('DOMContentLoaded', function() {
-    let person = localStorage.getItem('person')
+    person = localStorage.getItem('person')
     let getNewComment = localStorage.getItem('newComment')
     if (person != null && getNewComment != null) {
         document.querySelector('#person').value = person
-
         commentsAll = getNewComment.split(',')
-        // let newString = '' 
-        for (let comment of commentsAll) {
-
-            if (comment.search('/viagra/gi') || comment.search('/xxx/gi')) {
-                let filter = '***'
-                let checkResultFirst = comment.replace(/viagra/gi, filter)
-                let checkResultSecond = checkResultFirst.replace(/xxx/gi, filter)
-    
-                // newString += `<div class="out"><div class="inner inner_color" type="text">${personSaved}:</div><div class="inner" type="text">${checkResultSecond}</div></div>`    
-                container.innerHTML += `<div class="out"><div class="inner inner_color" type="text">${person}:</div><div class="inner" type="text">${checkResultSecond}</div></div>`                 
-            }
-            }                
-        // document.querySelector('#container').innerHTML = newString;           
+        addComment()                   
     } 
 
     let getImage = localStorage.getItem('avatar')
@@ -35,7 +23,6 @@ document.addEventListener('DOMContentLoaded', function() {
         let addAvaButton = document.querySelector('#addAva')
         addAvaButton.classList.toggle('hidden')
     }
-
 })
 
 function addAva() {
@@ -53,23 +40,11 @@ function addAva() {
 
 function checkSpam() {
     let checkComment = comment.value
-    let person = document.querySelector('#person').value
-
+    
     comment.value = '' 
     container.innerHTML = ''
     commentsAll.push(checkComment)
-
-
-    for (let comment of commentsAll) {
-        if (comment.search('/viagra/gi') || comment.search('/xxx/gi')) {
-            let filter = '***'
-            let checkResultFirst = comment.replace(/viagra/gi, filter)
-            console.log(checkResultFirst);
-            let checkResultSecond = checkResultFirst.replace(/xxx/gi, filter)
-
-            container.innerHTML += `<div class="out"><div class="inner inner_color" type="text">${person}:</div><div class="inner" type="text">${checkResultSecond}</div></div>`            
-        }
-    }   
+    addComment() 
 
     if (localStorage.getItem('newComment') == null) {                
         localStorage.setItem('newComment', commentsAll)                
@@ -85,10 +60,19 @@ function checkSpam() {
 
 }   
 
-// function addComment() {
-    
-// }
+function addComment() {
+    person = document.querySelector('#person').value
+    for (let comment of commentsAll) {
+        if (comment.search('/viagra/gi') || comment.search('/xxx/gi')) {
+            let filter = '***'
+            let checkResultFirst = comment.replace(/viagra/gi, filter)
+            console.log(checkResultFirst);
+            let checkResultSecond = checkResultFirst.replace(/xxx/gi, filter)
 
+            container.innerHTML += `<div class="out"><div class="inner inner_color" type="text">${person}:</div><div class="inner" type="text">${checkResultSecond}</div></div>`            
+        }
+    } 
+}
 
 button.addEventListener('click', checkSpam)
 
